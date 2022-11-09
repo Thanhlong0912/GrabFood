@@ -10,15 +10,14 @@ import Sdata from "./components/shops/Sdata"
 
 function App() {
   /*
-  step1 :  const { productItems } = Data 
-  lai pass garne using props
+  Step1 :  const { productItems } = Dữ liệu bằng cách sử dụng props
   
-  Step 2 : item lai cart ma halne using useState
-  ==> CartItem lai pass garre using props from  <Cart CartItem={CartItem} /> ani import garrxa in cartItem ma
+  Step 2 : Mục nhập lại giỏ hàng ma handle bằng useState
+  ==> CartItem lai pass garre using props from  <Cart CartItem={CartItem} />  import in cartItem
  
-  Step 3 :  chai flashCard ma xa button ma
+  Step 3 :  Thêm
 
-  Step 4 :  addToCart lai chai pass garne using props in pages and cart components
+  Step 4 :  addToCart bằng cách sử dụng props in pages and cart components
   */
 
   //Step 1 :
@@ -30,39 +29,36 @@ function App() {
 
   //Step 4 :
   const addToCart = (product) => {
-    // if hamro product alredy cart xa bhane  find garna help garxa
+    // Nếu  sản phẩm đã sẵn sàng giỏ hàng
     const productExit = CartItem.find((item) => item.id === product.id)
-    // if productExit chai alredy exit in cart then will run fun() => setCartItem
-    // ani inside => setCartItem will run => map() ani yo map() chai each cart ma
-    // gayara check garxa if item.id ra product.id chai match bhayo bhane
-    // productExit product chai display garxa
-    // ani increase  exits product QTY by 1
+    // if productExit thoát trong giỏ hàng thì sẽ chạy fun () => setCartItem 
+    // inside => setCartItem sẽ chạy => map() mỗi cart
+    // check if item.id , product.id 
+    // productExit product display
+    // increase product QTY by 1
     // if item and product doesnt match then will add new items
     if (productExit) {
       setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExit, qty: productExit.qty + 1 } : item)))
     } else {
-      // but if the product doesnt exit in the cart that mean if card is empty
-      // then new product is added in cart  and its qty is initalize to 1
+      // nếu k có thì cart is empty
+      // nếu có thì increase 1
       setCartItem([...CartItem, { ...product, qty: 1 }])
     }
   }
 
-  // Stpe: 6
+  // Step: 6
   const decreaseQty = (product) => {
-    // if hamro product alredy cart xa bhane  find garna help garxa
+    // sp có sẵn trong cart
     const productExit = CartItem.find((item) => item.id === product.id)
 
-    // if product is exit and its qty is 1 then we will run a fun  setCartItem
-    // inside  setCartItem we will run filter to check if item.id is match to product.id
-    // if the item.id is doesnt match to product.id then that items are display in cart
-    // else
+    // nếu item.id không khớp với product.id thì các mặt hàng đó sẽ được hiển thị trong giỏ hàng
     if (productExit.qty === 1) {
       setCartItem(CartItem.filter((item) => item.id !== product.id))
     } else {
-      // if product is exit and qty  of that produt is not equal to 1
-      // then will run function call setCartItem
-      // inside setCartItem we will run map method
-      // this map() will check if item.id match to produt.id  then we have to desc the qty of product by 1
+      // nếu sản phẩm thoát và qty của sản phẩm đó không bằng 1
+      // sau đó sẽ chạy hàm gọi setCartItem
+      // bên trong setCartItem, chúng ta sẽ chạy phương thức map()
+      // this map () sẽ kiểm tra xem item.id có khớp với produt.id hay không, sau đó chúng ta phải mô tả số lượng sản phẩm bằng 1
       setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExit, qty: productExit.qty - 1 } : item)))
     }
   }

@@ -32,7 +32,7 @@ const ShopCart = ({ shopItems, addToCart }) => {
                 <div className='price'>
                   <h4>{shopItems.price}.000VND </h4>
                   {/* step : 3  
-                     if hami le button ma click garryo bahne 
+                     bấm thêm
                     */}
                   <button onClick={() => addToCart(shopItems)}>
                     <i className='fa fa-plus'></i>
